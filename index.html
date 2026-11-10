@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <title>ميزان البر</title>
+    <meta name="description" content="دفتر شخصي تزن فيه برّك بوالديك وتقصيرك معهما، حجراً بحجر." />
+    <meta name="theme-color" content="#123A30" />
+
+    <meta property="og:title" content="ميزان البر" />
+    <meta property="og:description" content="زِن برّك بوالديك" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_SA" />
+
+    <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ميزان البر" />
+
+    <style>
+      html, body { height: 100%; margin: 0; background: #123A30; }
+      html[data-theme='light'], html[data-theme='light'] body { background: #E6E9DD; }
+      #splash {
+        position: fixed; inset: 0; display: grid; place-items: center;
+        color: #D9B977; font: 500 20px system-ui, sans-serif;
+      }
+      html[data-theme='light'] #splash { color: #7F5F28; }
+    </style>
+    <script>
+      // يُطبَّق المظهر قبل أول رسم حتى لا تومض الشاشة بلون آخر.
+      (function () {
+        var theme
+        try { theme = JSON.parse(localStorage.getItem('mizan-albirr/prefs') || '{}').theme } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.dataset.theme = theme
+        document.querySelector('meta[name=theme-color]').content = theme === 'light' ? '#E6E9DD' : '#123A30'
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"><div id="splash">ميزان البر</div></div>
+    <noscript>يحتاج ميزان البر إلى تفعيل JavaScript في المتصفح.</noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
